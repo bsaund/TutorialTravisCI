@@ -11,7 +11,7 @@ before_install:
   - docker ps
 
 install:
-  - $SH "pyclean"
+  - $SH "pyclean ."
   
 script:
   - $SH "pytest"
