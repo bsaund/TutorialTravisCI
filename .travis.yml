@@ -3,9 +3,11 @@ sudo: required
 services:
   - docker
 
+install:
+  - docker build .
+
 script:
-  - docker build -t shape_completion .
-  - docker run shape_completion
+  - docker run pytest
 
 after_script:
   - docker images
