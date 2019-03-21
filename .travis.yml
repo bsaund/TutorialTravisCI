@@ -3,11 +3,18 @@ sudo: required
 services:
   - docker
 
-install:
-  - docker build .
+env: SH="docker exec -t ubuntu-test bash -c"
 
+before_install:
+  - docker build -t shape_completion .
+  - docker run -d --name "ubuntu-test" -v $(pwd):/travis -w /travis shape_completion tail -f /dev/null
+  - docker ps
+
+install:
+  - $SH "pyclean"
+  
 script:
-  - docker run pytest
+  - $SH "pytest"
 
 after_script:
   - docker images
