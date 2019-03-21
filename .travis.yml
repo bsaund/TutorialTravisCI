@@ -1,3 +1,11 @@
-language: python
+sudo: required
+
+services:
+  - docker
+
 script:
-  pytest
+  - docker build -t shape_completion .
+  - docker run shape_completion
+
+after_script:
+  - docker images
